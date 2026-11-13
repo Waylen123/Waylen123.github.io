@@ -1,5 +1,9 @@
 # 韦人仁 Waylen · 个人主页（源码版）
 
+> **线上地址：https://waylen123.github.io/**
+> 仓库：https://github.com/Waylen123/Waylen123.github.io （公开）
+> 推送即部署：`git add -A && git commit -m "改动说明" && git push`，等 30 秒左右 GitHub Pages 自动重建。
+
 一份**完全手写**的静态站点：HTML + CSS + 原生 JS，没有框架、没有构建、没有 Framer 运行时。
 双击 `index.html` 能直接看（推荐用本地服务器预览，见下），也可以直接丢到 GitHub Pages。
 
