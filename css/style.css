@@ -436,6 +436,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: var(--radius);
   overflow: hidden;
 }
+/* 桌面端：右栏照片比左侧文字短，滚动时吸附，避免下方长期留白 */
+@media (min-width: 1025px) {
+  .about__figure { position: sticky; top: 96px; }
+}
 .about__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .about__figure figcaption {
   position: absolute;
