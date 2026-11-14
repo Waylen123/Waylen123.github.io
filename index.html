@@ -14,20 +14,18 @@
 </head>
 <body>
 
-<!-- ===================== 顶栏 ===================== -->
+<!-- ==================== 顶栏 ==================== -->
 <header class="site-header" id="siteHeader">
   <a class="brand" href="#top">Waylen’s Bio</a>
-
   <nav class="nav" aria-label="主导航">
     <a href="#about">关于我</a>
     <a href="#experience">经历</a>
+    <a href="#honors">荣誉</a>
     <a href="#skills">技能</a>
     <a href="#gallery">摄影作品</a>
     <a href="#contact">联系</a>
   </nav>
-
   <a class="btn header-cta" href="#contact">联系我</a>
-
   <button class="burger" id="burger" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
@@ -36,6 +34,7 @@
 <nav class="mobile-menu" id="mobileMenu" aria-label="移动端导航">
   <a href="#about">关于我</a>
   <a href="#experience">经历</a>
+  <a href="#honors">荣誉</a>
   <a href="#skills">技能</a>
   <a href="#gallery">摄影作品</a>
   <a href="#contact">联系</a>
@@ -43,284 +42,356 @@
 
 <main>
 
-  <!-- ===================== 首屏 ===================== -->
+  <!-- ==================== 01 首屏 ==================== -->
   <section class="hero" id="top">
     <div class="hero__media">
-      <img src="img/hero.jpg" alt="托斯卡纳乡间的葡萄园与庄园" fetchpriority="high">
+      <img src="img/hero.jpg" alt="托斯卡纳乡间的葡萄园与庄园" fetchpriority="high" data-kenburns>
     </div>
     <div class="hero__inner">
-      <h1>韦人仁 <em>Waylen</em></h1>
+      <h1 data-split>韦人仁 <em>Waylen</em></h1>
       <p class="hero__sub">05 后 · 酒店管理学子 · 学生创业者 · AI 工具重度使用者</p>
-      <a class="btn btn--ghost" href="#contact">联系我</a>
+      <a class="btn" href="#contact">联系我</a>
     </div>
     <div class="hero__hint">Scroll</div>
   </section>
 
-  <!-- ===================== 关于我 ===================== -->
-  <section class="section" id="about">
-    <div class="wrap">
-      <div class="about__grid">
-        <div class="reveal">
-          <span class="eyebrow">About</span>
-          <h2 class="section__title">关于我</h2>
-          <p class="lede" style="margin-top:26px">
-            韦人仁（Waylen），2005 年出生，广东韶关人，现常驻深圳。广州华商职业学院酒店管理与数字化运营专业大二在读（2025 级）。
-          </p>
-          <p class="lede">
-            一名把「服务现场」与「数字工具」两手都抓的学生创业者——从农产品研发到宠物消费出海，从餐饮茶饮到数字化运营，多线并行。习惯用 AI 与代码解决运营与内容问题：既能在吧台手冲一杯咖啡、在赛场完成酒水服务，也能写商业方案、做视觉、写脚本，并用 CloudBase 与 GitHub Pages 把想法落地成网页。
-          </p>
+  <!-- ==================== 02 关于我（Intro） ==================== -->
+  <section class="section intro" id="about">
+    <div class="wrap intro__grid">
+      <div class="intro__text">
+        <span class="eyebrow">About</span>
+        <h2 class="section__title" data-reveal>关于我</h2>
+        <p class="lede" data-reveal data-delay="80" style="margin-top:26px">
+          韦人仁（Waylen），2005 年出生，广东韶关人，现常驻深圳。广州华商职业学院酒店管理与数字化运营专业大二在读（2025 级）。
+        </p>
+        <p class="lede" data-reveal data-delay="160">
+          一名把「服务现场」与「数字工具」两手都抓的学生创业者——从农产品研发到宠物消费出海，从餐饮茶饮到数字化运营，多线并行。习惯用 AI 与代码解决运营与内容问题。
+        </p>
+        <a class="link-arrow" href="#experience" data-reveal data-delay="240">
+          往下看我的经历
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
 
-          <dl class="facts">
-            <div><dt>姓名</dt><dd>韦人仁（Waylen）</dd></div>
-            <div><dt>性别</dt><dd>男</dd></div>
-            <div><dt>出生</dt><dd>2005 年</dd></div>
-            <div><dt>籍贯</dt><dd>广东韶关</dd></div>
-            <div><dt>常驻地</dt><dd>深圳</dd></div>
-            <div><dt>身高 / 体重</dt><dd>183cm / 70kg</dd></div>
-          </dl>
-        </div>
-
-        <figure class="about__figure reveal">
-          <img src="img/about.jpg" alt="韦人仁在游艇码头的夜景照片" loading="lazy">
-          <figcaption>On deck</figcaption>
-        </figure>
+      <div class="intro__collage">
+        <figure class="ph ph--a" data-parallax="0.06"><img src="img/about.jpg" alt="韦人仁在游艇码头的夜景照片" loading="lazy"></figure>
+        <figure class="ph ph--b" data-parallax="-0.04"><img src="img/exp-01.jpg" alt="" loading="lazy"></figure>
+        <figure class="ph ph--c" data-parallax="0.09"><img src="img/shot-01.jpg" alt="" loading="lazy"></figure>
+        <figure class="ph ph--d" data-parallax="-0.07"><img src="img/exp-03.jpg" alt="" loading="lazy"></figure>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 经历 ===================== -->
-  <section class="section" id="experience">
+  <!-- ==================== 03 经历 · 上（01–05） ==================== -->
+  <section class="section exp" id="experience">
     <div class="wrap">
-      <div class="section__head reveal">
+      <div class="section__head">
         <span class="eyebrow">Experience</span>
-        <h2 class="section__title">经历</h2>
-        <p class="section__sub">广州华商职业学院 · 酒店管理与数字化运营专业 · 大二在读（2025 级）</p>
+        <h2 class="section__title" data-reveal>经历</h2>
+        <p class="section__sub" data-reveal data-delay="80">广州华商职业学院 · 酒店管理与数字化运营专业 · 大二在读（2025 级）</p>
       </div>
 
       <div class="exp-list">
-
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-01.jpg" alt="" loading="lazy"></figure>
-          <div>
+        <article class="exp-item" data-reveal>
+          <figure class="exp-item__figure" data-parallax="0.05"><img src="img/exp-01.jpg" alt="" loading="lazy"></figure>
+          <div class="exp-item__body">
             <div class="exp-item__no">01</div>
             <h3>「粤膳匠心兴产」突击队</h3>
             <div class="exp-item__role">主导角色</div>
-            <p class="exp-item__desc">以岭南饮食文化为切口做产业调研与方案输出，负责项目整体组织与落地推进。</p>
+            <p>以岭南饮食文化为切口做产业调研与方案输出，负责项目整体组织与落地推进。</p>
           </div>
         </article>
 
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-02.jpg" alt="" loading="lazy"></figure>
-          <div>
+        <article class="exp-item" data-reveal>
+          <figure class="exp-item__figure" data-parallax="-0.04"><img src="img/exp-02.jpg" alt="" loading="lazy"></figure>
+          <div class="exp-item__body">
             <div class="exp-item__no">02</div>
             <h3>广州太阳城酒店「三下乡」研发项目</h3>
             <div class="exp-item__role">参与研发</div>
-            <p class="exp-item__desc">参与酒店相关产品的研发与落地，从现场服务流程到产品结构做实际验证。</p>
+            <p>参与酒店相关产品的研发与落地，从现场服务流程到产品结构做实际验证。</p>
           </div>
         </article>
 
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-03.jpg" alt="" loading="lazy"></figure>
-          <div>
+        <article class="exp-item" data-reveal>
+          <figure class="exp-item__figure" data-parallax="0.05"><img src="img/exp-03.jpg" alt="" loading="lazy"></figure>
+          <div class="exp-item__body">
             <div class="exp-item__no">03</div>
             <h3>农产品研发线</h3>
             <div class="exp-item__role">二次研发 · 大创立项</div>
-            <p class="exp-item__desc">丝苗米融入增城特产食品的二次研发；大学生创新创业训练计划立项（编号 HSCXCY202611）。</p>
+            <p>丝苗米融入增城特产食品的二次研发；大学生创新创业训练计划立项（编号 HSCXCY202611）。</p>
           </div>
         </article>
 
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-04.jpg" alt="" loading="lazy"></figure>
-          <div>
+        <article class="exp-item" data-reveal>
+          <figure class="exp-item__figure" data-parallax="-0.04"><img src="img/exp-04.jpg" alt="" loading="lazy"></figure>
+          <div class="exp-item__body">
             <div class="exp-item__no">04</div>
             <h3>Paw Aurora</h3>
             <div class="exp-item__role">出海策划总负责人</div>
-            <p class="exp-item__desc">天然宝石轻奢宠物项圈品牌：中英文品牌命名、产品设计、视觉物料、内容脚本全链路负责。</p>
+            <p>天然宝石轻奢宠物项圈品牌：中英文品牌命名、产品设计、视觉物料、内容脚本全链路负责。</p>
           </div>
         </article>
 
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-05.jpg" alt="" loading="lazy"></figure>
-          <div>
+        <article class="exp-item" data-reveal>
+          <figure class="exp-item__figure" data-parallax="0.05"><img src="img/exp-05.jpg" alt="" loading="lazy"></figure>
+          <div class="exp-item__body">
             <div class="exp-item__no">05</div>
             <h3>LALAHOME 宠物智能饮水机</h3>
             <div class="exp-item__role">新加坡市场出海策划总负责人</div>
-            <p class="exp-item__desc">面向新加坡市场的品类调研、卖点重构与整合传播方案。</p>
+            <p>面向新加坡市场的品类调研、卖点重构与整合传播方案。</p>
           </div>
         </article>
-
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-06.jpg" alt="" loading="lazy"></figure>
-          <div>
-            <div class="exp-item__no">06</div>
-            <h3>手工奢侈品融合产业园</h3>
-            <div class="exp-item__role">项目负责人</div>
-            <p class="exp-item__desc">从产业定位、空间叙事到招商内容的全案统筹。</p>
-          </div>
-        </article>
-
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-07.jpg" alt="" loading="lazy"></figure>
-          <div>
-            <div class="exp-item__no">07</div>
-            <h3>「人仁茶记」线上项目</h3>
-            <div class="exp-item__role">网页与小程序开发</div>
-            <p class="exp-item__desc">从 0 搭建线上门店页与小程序，使用 GitHub Pages 部署上线。</p>
-          </div>
-        </article>
-
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-08.jpg" alt="" loading="lazy"></figure>
-          <div>
-            <div class="exp-item__no">08</div>
-            <h3>WDC 2026 小程序挑战赛</h3>
-            <div class="exp-item__role">欧洲及中东站 · 带队参赛</div>
-            <p class="exp-item__desc">作为团队负责人统筹选题、分工与最终答辩呈现。</p>
-          </div>
-        </article>
-
-        <article class="exp-item reveal">
-          <figure class="exp-item__figure"><img src="img/exp-09.jpg" alt="" loading="lazy"></figure>
-          <div>
-            <div class="exp-item__no">09</div>
-            <h3>「数字游民旅居」项目</h3>
-            <div class="exp-item__role">挑战杯省赛获奖团队 · 总负责人</div>
-            <p class="exp-item__desc">围绕数字游民的旅居需求做产品化方案，获省级赛事奖项。</p>
-          </div>
-        </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ===================== 荣誉 / 教育 ===================== -->
-  <section class="section section--dark" id="honors">
+  <!-- ==================== 04 档案（Meet the Maestro） ==================== -->
+  <section class="maestro" id="profile">
+    <div class="maestro__media"><img src="img/contact.jpg" alt="" loading="lazy" data-parallax="0.08"></div>
+    <div class="wrap maestro__inner">
+      <span class="eyebrow eyebrow--light">Profile</span>
+      <h2 class="maestro__title" data-reveal>韦人仁 <em>Waylen</em></h2>
+      <dl class="maestro__facts">
+        <div><dt>性别</dt><dd>男</dd></div>
+        <div><dt>出生</dt><dd>2005 年</dd></div>
+        <div><dt>籍贯</dt><dd>广东韶关</dd></div>
+        <div><dt>常驻地</dt><dd>深圳</dd></div>
+        <div><dt>身高 / 体重</dt><dd>183cm · 70kg</dd></div>
+        <div><dt>专业</dt><dd>酒店管理与数字化运营</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ==================== 05 图墙（Gallery） ==================== -->
+  <section class="wall" id="wall">
+    <div class="wrap section__head section__head--center">
+      <span class="eyebrow">Gallery</span>
+      <h2 class="section__title" data-reveal>现场的十个瞬间</h2>
+      <p class="section__sub" data-reveal data-delay="80">比赛、市集、后厨、出海——从吧台到提案桌。</p>
+    </div>
+    <div class="wall__rows" data-wall>
+      <div class="wall__row">
+        <img src="img/shot-01.jpg" alt="" loading="lazy">
+        <img src="img/exp-02.jpg" alt="" loading="lazy">
+        <img src="img/exp-04.jpg" alt="" loading="lazy">
+        <img src="img/shot-03.jpg" alt="" loading="lazy">
+        <img src="img/exp-06.jpg" alt="" loading="lazy">
+      </div>
+      <div class="wall__row wall__row--offset">
+        <img src="img/exp-07.jpg" alt="" loading="lazy">
+        <img src="img/shot-04.jpg" alt="" loading="lazy">
+        <img src="img/exp-09.jpg" alt="" loading="lazy">
+        <img src="img/shot-02.jpg" alt="" loading="lazy">
+        <img src="img/exp-05.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 06 经历 · 下（06–09）环形卡片 ==================== -->
+  <section class="orbit" id="orbit">
+    <div class="orbit__pin">
+      <div class="wrap orbit__inner">
+        <div class="orbit__head">
+          <span class="eyebrow eyebrow--light">Experience</span>
+          <h2 class="section__title orbit__title">还有四段</h2>
+          <p class="orbit__progress"><span id="orbitIndex">01</span> / 04</p>
+        </div>
+
+        <div class="orbit__stage" id="orbitStage">
+          <article class="card3d" data-index="0">
+            <img src="img/exp-06.jpg" alt="" loading="lazy">
+            <div class="card3d__body">
+              <div class="exp-item__no">06</div>
+              <h3>手工奢侈品融合产业园</h3>
+              <div class="exp-item__role">项目负责人</div>
+              <p>从产业定位、空间叙事到招商内容的全案统筹。</p>
+            </div>
+          </article>
+
+          <article class="card3d" data-index="1">
+            <img src="img/exp-07.jpg" alt="" loading="lazy">
+            <div class="card3d__body">
+              <div class="exp-item__no">07</div>
+              <h3>「人仁茶记」线上项目</h3>
+              <div class="exp-item__role">网页与小程序开发</div>
+              <p>从 0 搭建线上门店页与小程序，使用 GitHub Pages 部署上线。</p>
+            </div>
+          </article>
+
+          <article class="card3d" data-index="2">
+            <img src="img/exp-08.jpg" alt="" loading="lazy">
+            <div class="card3d__body">
+              <div class="exp-item__no">08</div>
+              <h3>WDC 2026 小程序挑战赛</h3>
+              <div class="exp-item__role">欧洲及中东站 · 带队参赛</div>
+              <p>作为团队负责人统筹选题、分工与最终答辩呈现。</p>
+            </div>
+          </article>
+
+          <article class="card3d" data-index="3">
+            <img src="img/exp-09.jpg" alt="" loading="lazy">
+            <div class="card3d__body">
+              <div class="exp-item__no">09</div>
+              <h3>「数字游民旅居」项目</h3>
+              <div class="exp-item__role">挑战杯省赛获奖团队 · 总负责人</div>
+              <p>围绕数字游民的旅居需求做产品化方案，获省级赛事奖项。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07 教育 · 所在地（Location） ==================== -->
+  <section class="section location" id="location">
     <div class="wrap">
-      <div class="section__head reveal">
+      <div class="section__head section__head--center">
+        <span class="eyebrow">Education & Base</span>
+        <h2 class="section__title" data-reveal>在广州读书，在深圳落地</h2>
+      </div>
+
+      <div class="location__grid">
+        <div class="location__card" data-reveal>
+          <h3>教育背景</h3>
+          <p>广州华商职业学院 · 酒店管理与数字化运营专业 · 大二在读（2025 级）</p>
+        </div>
+        <div class="location__card" data-reveal data-delay="90">
+          <h3>常驻地</h3>
+          <p>深圳 —— 项目、供应链与出海客户主要在这里对接。</p>
+        </div>
+        <div class="location__card" data-reveal data-delay="180">
+          <h3>籍贯</h3>
+          <p>广东韶关 —— 粤北的山水与饮食，是我最初的素材库。</p>
+        </div>
+      </div>
+
+      <div class="location__strip">
+        <img src="img/shot-05.jpg" alt="" loading="lazy" data-parallax="0.05">
+        <img src="img/exp-01.jpg" alt="" loading="lazy" data-parallax="-0.03">
+        <img src="img/shot-06.jpg" alt="" loading="lazy" data-parallax="0.06">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 08 荣誉（Testimonials） ==================== -->
+  <section class="section section--dark honors" id="honors">
+    <div class="wrap">
+      <div class="section__head section__head--center">
         <span class="eyebrow">Honors</span>
-        <h2 class="section__title">荣誉与证书</h2>
+        <h2 class="section__title" data-reveal>荣誉与证书</h2>
       </div>
 
       <div class="honor-grid">
-        <div class="card reveal">
-          <div class="card__year">2026</div>
-          <h3>广东省酒水服务技能比赛 · 一等奖</h3>
+        <article class="honor-card" data-reveal>
+          <div class="honor-card__stars" aria-label="五星">★★★★★</div>
+          <h3>2026 广东省酒水服务技能比赛 · 一等奖</h3>
           <p>省级职业技能赛事，酒水服务与调酒实操赛道。</p>
-        </div>
-        <div class="card reveal">
-          <div class="card__year">2026</div>
-          <h3>增城工匠「咖啡文化传播大使」</h3>
-          <p>咖啡手冲大赛授予的荣誉称号。</p>
-        </div>
-      </div>
+          <div class="honor-card__who">
+            <img src="img/shot-03.jpg" alt="" loading="lazy">
+            <span>韦人仁 Waylen<br><small>参赛选手</small></span>
+          </div>
+        </article>
 
-      <div class="edu reveal">
-        <span>Education</span>
-        <span>广州华商职业学院 · 酒店管理与数字化运营专业 · 大二在读（2025 级）</span>
+        <article class="honor-card" data-reveal data-delay="120">
+          <div class="honor-card__stars" aria-label="五星">★★★★★</div>
+          <h3>2026 增城工匠「咖啡文化传播大使」</h3>
+          <p>咖啡手冲大赛授予的荣誉称号，聚焦产地与风味的表达。</p>
+          <div class="honor-card__who">
+            <img src="img/shot-02.jpg" alt="" loading="lazy">
+            <span>韦人仁 Waylen<br><small>荣誉称号</small></span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 技能 ===================== -->
-  <section class="section" id="skills">
+  <!-- ==================== 09 技能（FAQ 手风琴） ==================== -->
+  <section class="section skills" id="skills">
     <div class="wrap">
-      <div class="section__head reveal">
+      <div class="section__head">
         <span class="eyebrow">Skills</span>
-        <h2 class="section__title">技能与工具</h2>
-        <p class="section__sub">从吧台到代码，从方案到画面——分六块展开。</p>
+        <h2 class="section__title" data-reveal>技能与工具</h2>
+        <p class="section__sub" data-reveal data-delay="80">从吧台到代码，从方案到画面——分六块展开。</p>
       </div>
 
-      <div class="acc" id="accordion">
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">01</span>
-            <span class="acc__name">专业实操</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>酒水服务与调酒</li>
-            <li>咖啡手冲与出品</li>
-            <li>酒店数字化运营开发</li>
-          </ul></div></div>
+      <div class="skills__grid">
+        <div class="acc" id="accordion">
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="true">
+              <span class="acc__idx">01</span><span class="acc__name">专业实操</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>酒水服务与调酒</li><li>咖啡手冲与出品</li><li>酒店数字化运营开发</li>
+            </ul></div></div>
+          </div>
+
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="false">
+              <span class="acc__idx">02</span><span class="acc__name">数字工具</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>GitHub Pages 部署与维护</li><li>腾讯云 CloudBase</li><li>微信开发者工具</li>
+              <li>Figma 插件</li><li>DeepSeek / WorkBuddy 等 AI 工具接入与调试</li>
+            </ul></div></div>
+          </div>
+
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="false">
+              <span class="acc__idx">03</span><span class="acc__name">AI 内容生产</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>AI 图像与视频生成</li><li>分镜脚本</li><li>商业海报与人像修图提示词工程</li>
+            </ul></div></div>
+          </div>
+
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="false">
+              <span class="acc__idx">04</span><span class="acc__name">内容与策划</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>品牌全案</li><li>商业计划书与营销方案</li><li>短视频脚本</li><li>中英双语内容撰写</li>
+            </ul></div></div>
+          </div>
+
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="false">
+              <span class="acc__idx">05</span><span class="acc__name">语言</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>普通话</li><li>粤语（母语级）</li><li>英语（CET-4，酒店专业英语）</li>
+            </ul></div></div>
+          </div>
+
+          <div class="acc__item">
+            <button class="acc__btn" aria-expanded="false">
+              <span class="acc__idx">06</span><span class="acc__name">沟通风格</span><span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div><ul>
+              <li>粤语区中英夹杂，节奏快、直给</li>
+              <li>正式场合可切换书面语与结构化表达</li>
+            </ul></div></div>
+          </div>
         </div>
 
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">02</span>
-            <span class="acc__name">数字工具</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>GitHub Pages 部署与维护</li>
-            <li>腾讯云 CloudBase</li>
-            <li>微信开发者工具</li>
-            <li>Figma 插件</li>
-            <li>DeepSeek / WorkBuddy 等 AI 工具接入与调试</li>
-          </ul></div></div>
-        </div>
-
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">03</span>
-            <span class="acc__name">AI 内容生产</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>AI 图像与视频生成</li>
-            <li>分镜脚本</li>
-            <li>商业海报与人像修图提示词工程</li>
-          </ul></div></div>
-        </div>
-
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">04</span>
-            <span class="acc__name">内容与策划</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>品牌全案</li>
-            <li>商业计划书与营销方案</li>
-            <li>短视频脚本</li>
-            <li>中英双语内容撰写</li>
-          </ul></div></div>
-        </div>
-
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">05</span>
-            <span class="acc__name">语言</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>普通话</li>
-            <li>粤语（母语级）</li>
-            <li>英语（CET-4，酒店专业英语）</li>
-          </ul></div></div>
-        </div>
-
-        <div class="acc__item">
-          <button class="acc__btn" aria-expanded="false">
-            <span class="acc__idx">06</span>
-            <span class="acc__name">沟通风格</span>
-            <span class="acc__icon" aria-hidden="true"></span>
-          </button>
-          <div class="acc__panel"><div><ul>
-            <li>粤语区中英夹杂，节奏快、直给</li>
-            <li>正式场合可切换书面语与结构化表达</li>
-          </ul></div></div>
-        </div>
+        <aside class="skills__side" data-reveal>
+          <p class="skills__quote">“把每一次服务现场，都当作一次可复用的产品设计。”</p>
+          <div class="skills__contact">
+            <div><span>邮箱</span><a href="mailto:WRR520.COM">WRR520.COM</a></div>
+            <div><span>手机</span><a href="tel:5201314">5201314</a></div>
+            <div><span>GitHub</span><a href="https://github.com/Waylen123" target="_blank" rel="noopener">Waylen123</a></div>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 摄影作品 ===================== -->
+  <!-- ==================== 10 摄影作品（Photography） ==================== -->
   <section class="section gallery" id="gallery">
     <div class="wrap">
-      <div class="section__head reveal">
+      <div class="section__head">
         <span class="eyebrow">Photography</span>
-        <h2 class="section__title">摄影作品</h2>
-        <p class="section__sub">自动向左循环播放 · 鼠标悬停暂停 · 换图见说明</p>
+        <h2 class="section__title" data-reveal>摄影作品</h2>
+        <p class="section__sub" data-reveal data-delay="80">自动向左循环播放 · 悬停暂停 · 点开可换图</p>
       </div>
     </div>
 
@@ -332,62 +403,52 @@
         <figure class="shot"><img src="img/shot-04.jpg" alt="照片 04" loading="lazy"><figcaption>照片 04</figcaption></figure>
         <figure class="shot"><img src="img/shot-05.jpg" alt="照片 05" loading="lazy"><figcaption>照片 05</figcaption></figure>
         <figure class="shot"><img src="img/shot-06.jpg" alt="照片 06" loading="lazy"><figcaption>照片 06</figcaption></figure>
-        <!-- 第二组由 JS 克隆，用于无缝循环；也可手动再写一遍 -->
       </div>
     </div>
   </section>
 
-  <!-- ===================== 联系 ===================== -->
-  <section class="section section--dark" id="contact">
-    <div class="wrap">
-      <div class="contact__grid">
-        <div class="reveal">
-          <span class="eyebrow">Contact</span>
-          <h2 class="section__title">联系我</h2>
-          <p class="section__sub">合作、项目、实习机会都欢迎直接找我。</p>
+  <!-- ==================== 11 联系（Form） ==================== -->
+  <section class="section section--dark contact" id="contact">
+    <div class="wrap contact__inner">
+      <span class="eyebrow">Contact</span>
+      <h2 class="section__title" data-reveal>联系我</h2>
+      <p class="section__sub" data-reveal data-delay="80">合作、项目、实习机会，直接找我最快。</p>
 
-          <div class="contact__list">
-            <div class="contact__row"><span>邮箱</span><a href="mailto:WRR520.COM">WRR520.COM</a></div>
-            <div class="contact__row"><span>手机</span><a href="tel:5201314">5201314</a></div>
-            <div class="contact__row"><span>GitHub</span><a href="https://github.com/Waylen123" target="_blank" rel="noopener">github.com/Waylen123</a></div>
-          </div>
-        </div>
-
-        <!-- 表单：默认用 mailto 兜底；要真收件就把 data-endpoint 填成 Formspree/FormSubmit 的地址 -->
-        <form class="form reveal" id="contactForm" data-endpoint="">
-          <div class="field">
-            <label for="f-name">姓名</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="f-mail">邮箱</label>
-            <input id="f-mail" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="f-msg">留言</label>
-            <textarea id="f-msg" name="message" rows="3" required></textarea>
-          </div>
-          <button class="btn" type="submit">发送</button>
-          <p class="form__note" id="formNote">默认走本机邮件客户端；填了 <code>data-endpoint</code> 就会直接提交到表单服务。</p>
-        </form>
+      <div class="contact__cards">
+        <a class="contact__card" href="mailto:WRR520.COM" data-reveal>
+          <span>邮箱</span>
+          <strong>WRR520.COM</strong>
+        </a>
+        <a class="contact__card" href="tel:5201314" data-reveal data-delay="90">
+          <span>手机</span>
+          <strong>5201314</strong>
+        </a>
+        <a class="contact__card" href="https://github.com/Waylen123" target="_blank" rel="noopener" data-reveal data-delay="180">
+          <span>GitHub</span>
+          <strong>github.com/Waylen123</strong>
+        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ===================== 页脚 ===================== -->
+<!-- ==================== 12 页脚 ==================== -->
 <footer class="site-footer">
   <div class="wrap">
-    <a class="brand" href="#top">Waylen’s Bio</a>
-    <nav aria-label="页脚导航">
-      <a href="#about">关于我</a>
-      <a href="#experience">经历</a>
-      <a href="#skills">技能</a>
-      <a href="#gallery">摄影作品</a>
-      <a href="#contact">联系</a>
-    </nav>
-    <span>© 2026 韦人仁 Waylen · 个人主页</span>
+    <div class="footer__big" data-reveal>Waylen</div>
+    <div class="footer__bar">
+      <a class="brand" href="#top">Waylen’s Bio</a>
+      <nav aria-label="页脚导航">
+        <a href="#about">关于我</a>
+        <a href="#experience">经历</a>
+        <a href="#honors">荣誉</a>
+        <a href="#skills">技能</a>
+        <a href="#gallery">摄影作品</a>
+        <a href="#contact">联系</a>
+      </nav>
+      <span>© 2026 韦人仁 Waylen · 个人主页</span>
+    </div>
   </div>
 </footer>
 

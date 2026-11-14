@@ -1,66 +1,53 @@
 /* =========================================================
    韦人仁 Waylen · 个人主页
-   原生 JS，无依赖。功能：顶栏状态、移动菜单、滚动入场、
-   手风琴、跑马灯无缝循环、表单兜底、导航高亮。
+   原生 JS，无依赖。
+   交互：顶栏 / 移动菜单 / 滚动入场 / 视差 / 图墙联动 /
+        环形卡片 / 手风琴 / 跑马灯 / 表单 / 导航高亮
    ========================================================= */
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
 
-  /* ---------- 1. 顶栏：滚动后变实底 ---------- */
+  /* ---------- 1. 顶栏 ---------- */
   var header = document.getElementById('siteHeader');
-  function onScroll() {
-    if (!header) return;
-    header.classList.toggle('is-stuck', window.scrollY > 40);
+  function onHeader() {
+    if (header) header.classList.toggle('is-stuck', window.scrollY > 40);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
-  /* ---------- 2. 移动端菜单 ---------- */
+  /* ---------- 2. 移动菜单 ---------- */
   var burger = document.getElementById('burger');
   var menu = document.getElementById('mobileMenu');
-
   function closeMenu() {
     if (!burger || !menu) return;
     burger.setAttribute('aria-expanded', 'false');
-    burger.setAttribute('aria-label', '打开菜单');
     menu.classList.remove('is-open');
     document.body.style.overflow = '';
   }
-  function toggleMenu() {
-    if (!burger || !menu) return;
-    var open = burger.getAttribute('aria-expanded') === 'true';
-    if (open) {
-      closeMenu();
-    } else {
+  if (burger) {
+    burger.addEventListener('click', function () {
+      var open = burger.getAttribute('aria-expanded') === 'true';
+      if (open) { closeMenu(); return; }
       burger.setAttribute('aria-expanded', 'true');
-      burger.setAttribute('aria-label', '关闭菜单');
       menu.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-    }
-  }
-  if (burger) burger.addEventListener('click', toggleMenu);
-  if (menu) {
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeMenu();
     });
   }
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeMenu();
-  });
+  if (menu) menu.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
   /* ---------- 3. 滚动入场 ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduceMotion) {
+  var revealEls = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-in');
-          io.unobserve(en.target);
-        }
+        if (!en.isIntersecting) return;
+        var d = parseInt(en.target.getAttribute('data-delay') || '0', 10);
+        setTimeout(function () { en.target.classList.add('is-in'); }, d);
+        io.unobserve(en.target);
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
@@ -71,73 +58,114 @@
   if (acc) {
     acc.addEventListener('click', function (e) {
       var btn = e.target.closest('.acc__btn');
-      if (!btn || !acc.contains(btn)) return;
-      var isOpen = btn.getAttribute('aria-expanded') === 'true';
-      acc.querySelectorAll('.acc__btn').forEach(function (b) {
-        b.setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) btn.setAttribute('aria-expanded', 'true');
+      if (!btn) return;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      acc.querySelectorAll('.acc__btn').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+      if (!open) btn.setAttribute('aria-expanded', 'true');
     });
   }
 
   /* ---------- 5. 跑马灯：克隆一份实现无缝循环 ---------- */
   var track = document.getElementById('marqueeTrack');
   if (track) {
-    var cards = Array.prototype.slice.call(track.children);
-    cards.forEach(function (c) {
+    [].slice.call(track.children).forEach(function (c) {
       var clone = c.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     });
   }
 
-  /* ---------- 6. 表单：有 endpoint 就 POST，否则 mailto 兜底 ---------- */
-  var form = document.getElementById('contactForm');
-  var note = document.getElementById('formNote');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var data = new FormData(form);
-      var endpoint = form.getAttribute('data-endpoint');
-
-      if (endpoint) {
-        fetch(endpoint, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' }
-        }).then(function (r) {
-          if (note) note.textContent = r.ok ? '已发送，我会尽快回你。' : '发送失败，请直接发邮件。';
-          if (r.ok) form.reset();
-        }).catch(function () {
-          if (note) note.textContent = '网络异常，请直接发邮件。';
-        });
-        return;
-      }
-
-      var subject = '来自网站的留言：' + (data.get('name') || '');
-      var body = (data.get('message') || '') + '\n\n回信邮箱：' + (data.get('email') || '');
-      window.location.href = 'mailto:WRR520.COM?subject=' +
-        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      if (note) note.textContent = '已打开本机邮件客户端；想直接用表单收件，请填写 data-endpoint。';
-    });
-  }
-
-  /* ---------- 7. 导航高亮当前区块 ---------- */
-  var links = document.querySelectorAll('.nav a[href^="#"]');
-  var sections = [];
-  links.forEach(function (a) {
-    var sec = document.querySelector(a.getAttribute('href'));
-    if (sec) sections.push({ link: a, sec: sec });
-  });
-  if (sections.length && 'IntersectionObserver' in window) {
+  /* ---------- 6. 导航高亮 ---------- */
+  var navLinks = [].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var navMap = navLinks.map(function (a) {
+    return { link: a, sec: document.querySelector(a.getAttribute('href')) };
+  }).filter(function (x) { return x.sec; });
+  if (navMap.length && 'IntersectionObserver' in window) {
     var navIo = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
-        sections.forEach(function (s) {
-          s.link.classList.toggle('is-active', s.sec === en.target);
-        });
+        navMap.forEach(function (m) { m.link.classList.toggle('is-active', m.sec === en.target); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { navIo.observe(s.sec); });
+    navMap.forEach(function (m) { navIo.observe(m.sec); });
   }
+
+  /* ---------- 8. 视差 / 图墙 / 环形卡片：一个 rAF 循环搞定 ---------- */
+  var parallaxEls = [].slice.call(document.querySelectorAll('[data-parallax]'));
+  var wallRows = [].slice.call(document.querySelectorAll('.wall__row'));
+  var wallSection = document.querySelector('.wall');
+  var orbit = document.getElementById('orbit');
+  var orbitCards = [].slice.call(document.querySelectorAll('.card3d'));
+  var orbitIndexEl = document.getElementById('orbitIndex');
+
+  function frame() {
+    var vh = window.innerHeight;
+    var sy = window.scrollY;
+
+    /* 视差 */
+    if (!reduce) {
+      parallaxEls.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var speed = parseFloat(el.getAttribute('data-parallax')) || 0;
+        var mid = r.top + r.height / 2 - vh / 2;
+        el.style.transform = 'translate3d(0,' + (-mid * speed).toFixed(2) + 'px,0)';
+      });
+    }
+
+    /* 图墙：两排反向平移 */
+    if (wallRows.length && wallSection) {
+      var wr = wallSection.getBoundingClientRect();
+      var p = clamp((vh - wr.top) / (vh + wr.height), 0, 1);   // 0→1 随滚动
+      wallRows.forEach(function (row, i) {
+        var dir = i === 0 ? -1 : 1;
+        var base = i === 0 ? 0 : -6;                            // 第二排初始偏移见 CSS
+        var shift = base + dir * p * 10;                        // 最多再动 10%
+        row.style.transform = 'translate3d(' + shift.toFixed(2) + '%,0,0)';
+      });
+    }
+
+    /* 环形卡片 */
+    if (orbit && orbitCards.length) {
+      var orect = orbit.getBoundingClientRect();
+      var total = orbit.offsetHeight - vh;
+      var prog = total > 0 ? clamp((-orect.top) / total, 0, 1) : 0;
+      var n = orbitCards.length;
+      var t = prog * (n - 1);
+      var vw = window.innerWidth;
+      var unit = vw < 760 ? Math.min(vw * 0.82, 340) : Math.min(vw * 0.34, 380);  // 卡片间距
+
+      orbitCards.forEach(function (card, i) {
+        var off = i - t;
+        var abs = Math.abs(off);
+        var x = off * unit;
+        var z = -abs * 160;
+        var rotY = -off * 17;
+        var scale = 1 - Math.min(abs, 1) * 0.12;
+        var op = abs > 1.6 ? 0 : 1 - abs * 0.4;
+        card.style.transform =
+          'translate(-50%,-50%) translateX(' + x.toFixed(1) + 'px) translateZ(' + z.toFixed(0) + 'px)' +
+          ' rotateY(' + rotY.toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
+        card.style.opacity = op.toFixed(3);
+        card.style.zIndex = String(50 - Math.round(abs * 10));
+        card.style.pointerEvents = abs < 0.5 ? 'auto' : 'none';
+      });
+
+      if (orbitIndexEl) {
+        orbitIndexEl.textContent = ('0' + (Math.round(t) + 1)).slice(-2);
+      }
+    }
+  }
+
+  var scheduled = false;
+  function onScroll() {
+    onHeader();
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(function () { scheduled = false; frame(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { frame(); }, { passive: true });
+  onScroll();
+  frame();
 })();
