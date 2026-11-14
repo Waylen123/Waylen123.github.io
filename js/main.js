@@ -97,6 +97,7 @@
   var orbit = document.getElementById('orbit');
   var orbitCards = [].slice.call(document.querySelectorAll('.card3d'));
   var orbitIndexEl = document.getElementById('orbitIndex');
+  var orbitOutro = document.getElementById('orbitOutro');
 
   function frame() {
     var vh = window.innerHeight;
@@ -125,34 +126,56 @@
       });
     }
 
-    /* 环形卡片 */
+    /* 卡片堆：一张张斜着飞走；往回滚原路叠回（纯进度函数，天然可逆） */
     if (orbit && orbitCards.length) {
       var orect = orbit.getBoundingClientRect();
       var total = orbit.offsetHeight - vh;
-      var prog = total > 0 ? clamp((-orect.top) / total, 0, 1) : 0;
+      var p = total > 0 ? clamp((-orect.top) / total, 0, 1) : 0;
       var n = orbitCards.length;
-      var t = prog * (n - 1);
-      var vw = window.innerWidth;
-      var unit = vw < 760 ? Math.min(vw * 0.82, 340) : Math.min(vw * 0.34, 380);  // 卡片间距
+      var seg = 1 / n;
+      var vw = window.innerWidth, vh2 = vh;
+      var front = p / seg;                       // 0 → n，表示「已经飞走了几张」
+      var active = Math.min(n - 1, Math.floor(front + 0.5));   // 当前压在顶上那张
 
       orbitCards.forEach(function (card, i) {
-        var off = i - t;
-        var abs = Math.abs(off);
-        var x = off * unit;
-        var z = -abs * 160;
-        var rotY = -off * 17;
-        var scale = 1 - Math.min(abs, 1) * 0.12;
-        var op = abs > 1.6 ? 0 : 1 - abs * 0.4;
+        // 该卡自己的飞出进度：0 静止在堆里，1 完全飞走
+        var local = clamp((p - i * seg) / seg, 0, 1);
+        // 堆内深度：上面还压着几张（随前面卡飞走而减小）
+        var depth = clamp(i - front, 0, n);
+        var dir = i % 2 === 0 ? 1 : -1;          // 偶数往右斜上，奇数往左斜上
+
+        // 静止态（堆叠）：越深越往下、越歪、越小，像一摞牌
+        var restY = depth * 14;
+        var restX = depth * 4;
+        var restRot = dir * depth * 2.2;
+        var restScale = 1 - depth * 0.045;
+
+        // 飞出位移（同一条路径正反向都成立）
+        var outX = dir * local * vw * 0.95;
+        var outY = -local * vh2 * 0.7;
+        var outRot = dir * local * 22;
+
+        var x = restX + outX;
+        var y = restY + outY;
+        var rot = restRot + outRot;
+        var scale = restScale - local * 0.08;
+        var op = local < 0.55 ? 1 : 1 - (local - 0.55) / 0.45;
+
         card.style.transform =
-          'translate(-50%,-50%) translateX(' + x.toFixed(1) + 'px) translateZ(' + z.toFixed(0) + 'px)' +
-          ' rotateY(' + rotY.toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
+          'translate(-50%,-50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)' +
+          ' rotate(' + rot.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
         card.style.opacity = op.toFixed(3);
-        card.style.zIndex = String(50 - Math.round(abs * 10));
-        card.style.pointerEvents = abs < 0.5 ? 'auto' : 'none';
+        card.style.zIndex = String(n - i);
+        card.style.pointerEvents = (i === active && local < 0.2) ? 'auto' : 'none';
       });
 
       if (orbitIndexEl) {
-        orbitIndexEl.textContent = ('0' + (Math.round(t) + 1)).slice(-2);
+        orbitIndexEl.textContent = ('0' + (active + 1)).slice(-2);
+      }
+      if (orbitOutro) {
+        var allGone = p > 0.93;          // 四张都飞走后，淡入收尾文案
+        orbitOutro.classList.toggle('is-on', allGone);
+        orbitOutro.setAttribute('aria-hidden', allGone ? 'false' : 'true');
       }
     }
   }
