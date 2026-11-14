@@ -36,7 +36,8 @@ python -m http.server 8901 --directory 站点源码
 | 主色 / 背景色 | `css/style.css` 顶部的 `:root` 变量：`--cream` `--green` `--olive` |
 | 大标题字体大小 | `.hero h1` 里的 `clamp(2.9rem, 8vw, 6.2rem)` |
 | 区块间距 | `--section-y`、`--section-pad` |
-| 加一条经历 | 复制 `index.html` 里任意一段 `<article class="exp-item reveal">…</article>`，改编号/标题/描述/图片 |
+| 加一条经历 | 复制 `index.html` 里任意一段 `<article class="exp-item" data-reveal>…</article>`，改编号/标题/描述/图片 |
+| 改环形卡片（06–09） | `.orbit` 里的 `<article class="card3d">`，数量随意加，JS 按数量自动分配滚动进度 |
 | 技能条目 | 复制一段 `<div class="acc__item">…</div>`，改 `acc__idx` 和 `acc__name` |
 | 换照片 | 把新图放进 `img/` 覆盖同名文件（`hero.jpg`、`exp-01…09.jpg`、`shot-01…06.jpg`），或改 `src` |
 | 跑马灯速度 | `css/style.css` 的 `animation: marquee 46s`，数字越大越慢 |
@@ -49,17 +50,13 @@ python -m http.server 8901 --directory 站点源码
 3. 滚动入场（IntersectionObserver，尊重 `prefers-reduced-motion`）；
 4. 技能手风琴（同时只开一个）；
 5. 摄影跑马灯（JS 克隆一份卡片实现无缝循环，hover 暂停）；
-6. 表单：没填 `data-endpoint` 时走本机邮件客户端。
+6. 联系区只有三张联系方式卡片（邮箱 / 手机 / GitHub），**没有表单、没有发送按钮**——与 Framer 版一致。
 
-### 让表单真能收信
+### 联系区为什么没有表单
 
-去 [Formspree](https://formspree.io/) 或 [FormSubmit](https://formsubmit.co/) 拿一个 endpoint，填到：
+Framer 版里已经把「发送按钮」那一整块删掉了，所以这版也不做表单：三张卡片直接可点（邮件 / 拨号 / GitHub）。
 
-```html
-<form class="form reveal" id="contactForm" data-endpoint="https://formspree.io/f/xxxxxxx">
-```
-
-填了之后 `main.js` 会用 `fetch` 直接 POST，不再弹邮件客户端。
+想加回表单，把 `<section id="contact">` 里的 `.contact__cards` 换成 `<form>` 即可。
 
 ## 部署到 GitHub Pages
 
